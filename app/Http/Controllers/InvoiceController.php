@@ -79,6 +79,22 @@ class InvoiceController extends Controller
     }
 
     /**
+     * Download the specified invoice.
+     */
+    public function download(Invoice $invoice)
+    {
+        $products = json_decode($invoice->products);
+        $html = view('invoices.invoice-download', compact('invoice', 'products'))->render();
+        $filename = 'invoice-' . $invoice->invoice_no . '.html';
+
+        return response($html, 200, [
+            'Content-Type' => 'text/html; charset=utf-8',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Cache-Control' => 'no-cache, no-store, must-revalidate',
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Invoice $invoice)

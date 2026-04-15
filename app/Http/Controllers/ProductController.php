@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('brand', 'batches')->get();
         return view('products.index', compact('products'));
     }
 
@@ -72,7 +72,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('products.show', compact('product'));
+        //
     }
 
     /**

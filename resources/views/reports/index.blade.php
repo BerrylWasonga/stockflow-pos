@@ -179,10 +179,10 @@
         </table>
         <div class="row m-t-10">
             <div class="col-6">
-                <button class="btn border-dark btn-block"><i class="feather icon-printer"></i> Print</button>
+                <button id="printReport" class="btn border-dark btn-block"><i class="feather icon-printer"></i> Print</button>
             </div>
             <div class="col-6">
-                <button class="btn border-dark btn-block"><i class="feather icon-download"></i> Download</button>
+                <button id="downloadReport" class="btn border-dark btn-block"><i class="feather icon-download"></i> Download</button>
             </div>
         </div>
     </div>
@@ -194,4 +194,21 @@
 @endsection
 
 @push('scripts')
+<script>
+    document.getElementById('printReport').addEventListener('click', function() {
+        window.print();
+    });
+
+    document.getElementById('downloadReport').addEventListener('click', function() {
+        const range = '{{ $_GET['range'] ?? '' }}';
+        const to = '{{ $_GET['to'] ?? '' }}';
+        const from = '{{ $_GET['from'] ?? '' }}';
+        
+        let url = `/reports/download?range=${encodeURIComponent(range)}`;
+        if (to) url += `&to=${encodeURIComponent(to)}`;
+        if (from) url += `&from=${encodeURIComponent(from)}`;
+        
+        window.location.href = url;
+    });
+</script>
 @endpush

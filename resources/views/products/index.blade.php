@@ -44,7 +44,7 @@
                 @foreach($products as $product)
                 <tr>
                     <td>{{ $product->name }}</td>
-                    <td>{{ $product->brand->name }}</td>
+                    <td>{{ $product->brand?->name ?? 'N/A' }}</td>
                     <td>
                         @foreach ($product->batches as $batch)
                         <span class="badge badge-success">{{ $batch->batch_no }}</span>

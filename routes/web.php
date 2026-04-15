@@ -28,7 +28,6 @@ use App\Http\Controllers\DashboardController;
 
 //All these routes REQUIRE a logged-in user
 Route::group(['middleware' => 'auth'], function () {
-
     // Route to Dashboard
     Route::get('/', [DashboardController::class, 'index']);
 
@@ -45,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Managing the customers
     Route::resource('customers', CustomerController::class);
     // Managing Invoices
+    Route::get('invoices/{invoice}/download', [InvoiceController::class, 'download'])->name('invoices.download');
     Route::resource('invoices', InvoiceController::class);
     // Managing Expenses Categories
     Route::resource('expenses', ExpenseController::class);
@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('types', TypeController::class);
     // Managing Reports
     Route::get('/reports', [ReportController::class, 'index'])->name('reports');
+    Route::get('/reports/download', [ReportController::class, 'download'])->name('reports.download');
     // Managing Reports
     Route::resource('/setting', SettingController::class);
     // Managing User Profile
