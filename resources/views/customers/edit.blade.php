@@ -44,6 +44,10 @@
                         <textarea name="address" id="" cols="30" rows="3"
                             class="form-control">{{ $customer->address }}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" value="{{ $customer->location }}" placeholder="e.g. Kenya, Uganda, Bangladesh">
+                    </div>
                     <button type="submit" class="btn  btn-primary">Edit Customer</button>
                 </div>
             </div>

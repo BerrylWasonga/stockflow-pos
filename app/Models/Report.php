@@ -55,28 +55,24 @@ class Report extends Model
 
         // 3 ----------------------------------------------------- Counting the total sold product (in the current date)
         $soldProducts = 0;
-        $invoices = Invoice::whereBetween('created_at', [$startDate, $endDate])->get();
+        $invoices = Invoice::whereBetween('created_at', [$startDate, $endDate])->with('items')->get();
         foreach ($invoices as $invoice) {
-            foreach (json_decode($invoice->products) as $p) {
-                $soldProducts += $p->quantity;
+            foreach ($invoice->items as $item) {
+                $soldProducts += $item->quantity;
             }
         }
 
         // 4 ----------------------------------------------------- Counting the top sold product
 
-        // Decode JSON data into a PHP array
-        $invoices = json_decode(Invoice::whereBetween('created_at', [$startDate, $endDate])->get(), true);
-
         // Initialize an empty array to store the total quantity of each product
         $productQuantity = [];
 
-        foreach (Invoice::whereBetween('created_at', [$startDate, $endDate])->get() as $invoice) {
-            $products = json_decode($invoice['products'], true);
-            foreach ($products as $product) {
-                $productName = $product['name'];
+        foreach (Invoice::whereBetween('created_at', [$startDate, $endDate])->with('items')->get() as $invoice) {
+            foreach ($invoice->items as $item) {
+                $productName = $item->name;
                 $productQuantity[$productName] = isset($productQuantity[$productName])
-                    ? $productQuantity[$productName] + $product['quantity']
-                    : $product['quantity'];
+                    ? $productQuantity[$productName] + $item->quantity
+                    : $item->quantity;
             }
         }
 

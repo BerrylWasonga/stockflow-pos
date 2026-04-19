@@ -33,7 +33,8 @@ class CustomerController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'location' => 'required'
         ]);
 
         $customer = new Customer();
@@ -41,6 +42,7 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->email = $request->email;
         $customer->address = $request->address;
+        $customer->location = $request->location;
         $customer->save();
         return redirect()->route('customers.index');
     }
@@ -70,13 +72,15 @@ class CustomerController extends Controller
             'name' => 'required',
             'phone' => 'required',
             'email' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'location' => 'required'
         ]);
 
         $customer->name = $request->name;
         $customer->phone = $request->phone;
         $customer->email = $request->email;
         $customer->address = $request->address;
+        $customer->location = $request->location;
         $customer->update();
         return redirect()->route('customers.index');
     }

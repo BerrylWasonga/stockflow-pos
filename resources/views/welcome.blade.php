@@ -38,22 +38,22 @@
                 <div class="col-sm-6 card-body br">
                     <div class="row">
                         <div class="col-sm-2">
-                            <i class="icon feather icon-eye text-c-green mb-1 d-block"></i>
+                            <i class="icon feather icon-package text-c-green mb-1 d-block"></i>
                         </div>
                         <div class="col-sm-10 text-md-center">
                             <h5>Products In Stock</h5>
-                            <span>{{ $dailyReport['productsCount'] }}pc</span>
+                            <span>{{ $dailyReport['productsCount'] }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 card-body">
                     <div class="row">
                         <div class="col-sm-2">
-                            <i class="icon feather icon-music text-c-red mb-1 d-block"></i>
+                            <i class="icon feather icon-trending-up text-c-red mb-1 d-block"></i>
                         </div>
                         <div class="col-sm-10 text-md-center">
                             <h5>Sold Products</h5>
-                            <span>{{ $dailyReport['soldProducts'] }}pc</span>
+                            <span>{{ $dailyReport['soldProducts'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -62,23 +62,23 @@
                 <div class="col-sm-6 card-body br">
                     <div class="row">
                         <div class="col-sm-2">
-                            <i class="icon feather icon-file-text text-c-blue mb-1 d-block"></i>
+                            <i class="icon feather icon-alert-triangle text-c-blue mb-1 d-block"></i>
                         </div>
                         <div class="col-sm-10 text-md-center">
                             <h5>Out Of Stock Products</h5>
-                            <span>{{ $dailyReport['outOfStockProducts'] }}pc</span>
+                            <span>{{ $dailyReport['outOfStockProducts'] }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 card-body">
                     <div class="row">
                         <div class="col-sm-2 p-r-0">
-                            <i class="icon feather icon-mail text-c-yellow mb-1 d-block"></i>
+                            <i class="icon feather icon-star text-c-yellow mb-1 d-block"></i>
                         </div>
                         <div class="col-sm-10 p-l-0 text-md-center">
                             <h5>Most Sold Products</h5>
                             <span>{{ $dailyReport['topSoldProduct']['maxProduct'] }} {{
-                                $dailyReport['topSoldProduct']['maxQuantity'] }}pc</span>
+                                $dailyReport['topSoldProduct']['maxQuantity'] }}</span>
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                 <div class="col-sm-6 card-body br">
                     <div class="row">
                         <div class="col-sm-2">
-                            <i class="icon feather icon-share-2 text-c-blue mb-1 d-block"></i>
+                            <i class="icon feather icon-list text-c-blue mb-1 d-block"></i>
                         </div>
                         <div class="col-sm-10 text-md-center">
                             <h5>Toal Order</h5>
@@ -107,7 +107,7 @@
                 <div class="col-sm-6 card-body">
                     <div class="row">
                         <div class="col-sm-2">
-                            <i class="icon feather icon-wifi text-c-blue mb-1 d-block"></i>
+                            <i class="icon feather icon-briefcase text-c-blue mb-1 d-block"></i>
                         </div>
                         <div class="col-sm-10 text-md-center">
                             <h5>Total Sell Amount</h5>
@@ -120,7 +120,7 @@
                 <div class="col-sm-6 card-body br">
                     <div class="row">
                         <div class="col-sm-2">
-                            <i class="icon feather icon-rotate-ccw text-c-blue mb-1 d-block"></i>
+                            <i class="icon feather icon-check-circle text-c-blue mb-1 d-block"></i>
                         </div>
                         <div class="col-sm-10 text-md-center">
                             <h5>Total Paid Amount</h5>
@@ -131,7 +131,7 @@
                 <div class="col-sm-6 card-body">
                     <div class="row">
                         <div class="col-sm-2">
-                            <i class="icon feather icon-shopping-cart text-c-blue mb-1 d-blockz"></i>
+                            <i class="icon feather icon-credit-card text-c-blue mb-1 d-blockz"></i>
                         </div>
                         <div class="col-sm-10 text-md-center">
                             <h5>Total Due Amount</h5>

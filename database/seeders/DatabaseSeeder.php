@@ -15,80 +15,77 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'Al Azad Heera',
-            'email' => 'alazadheera@gmail.com',
+            'name' => 'Berryl Wasonga',
+            'email' => 'berrylwasonga@gmail.com',
             'password' => Hash::make('password'),
         ]);
 
         DB::table('settings')->insert([
-            'shop_name' => 'Cell Mela',
+            'shop_name' => 'Berryl Hardware Store',
             'logo' => 'logo.png'
         ]);
 
         DB::table('brands')->insert([
-            ['name' => 'IPhone'],
-            ['name' => 'Nokia']
+            ['name' => 'Bamburi Cement'],
+            ['name' => 'Crown Paints'],
+            ['name' => 'Devki Steel']
         ]);
 
         DB::table('categories')->insert([
-            ['name' => 'Feature Phone'],
-            ['name' => 'Touch Phone']
-        ]);
+                ['name' => 'Cement'],
+                ['name' => 'Paint'],
+                ['name' => 'Iron Sheets'],
+                ['name' => 'Tools']
+                    ]);
 
         DB::table('customers')->insert([
             [
-                'name' => 'Abul Kalam',
-                'phone' => '017xxxxxx',
-                'email' => 'abul@email.com',
-                'address' => 'Rangpur, Bangladesh.',
+                'name' => 'John Otieno',
+                'phone' => '0712345678',
+                'email' => 'john@gmail.com',
+                'address' => 'Siaya, Kenya',
             ],
             [
-                'name' => 'Abdul Baten',
-                'phone' => '019xxxxxx',
-                'email' => 'baten@email.com',
-                'address' => 'Sylhet Bangladesh.'
+                'name' => 'Mary Akinyi',
+                'phone' => '0798765432',
+                'email' => 'mary@gmail.com',
+                'address' => 'Kisumu, Kenya'
             ]
         ]);
 
         DB::table('suppliers')->insert([
             [
-                'name' => 'Mojaffor Rahman',
-                'phone' => '018xxxxxx',
-                'email' => 'mojaffor@email.com',
-                'address' => 'Khulna, Bangladesh.',
+                'name' => 'Kenya Builders Ltd',
+                'phone' => '0700111222',
+                'email' => 'info@builders.co.ke',
+                'address' => 'Nairobi, Kenya',
             ],
             [
-                'name' => 'Mofijul Islam',
-                'phone' => '019xxxxxx',
-                'email' => 'mofij@email.com',
-                'address' => 'Rajshahi, Bangladesh.'
+                'name' => 'East Africa Supplies',
+                'phone' => '0722333444',
+                'email' => 'supply@ea.com',
+                'address' => 'Mombasa, Kenya'
             ]
         ]);
 
         DB::table('products')->insert([
             [
-                'name' => 'IPhone 3',
-                'description' => 'Special phone produced by Apple Corp.',
+                'name' => 'Bamburi Cement 50kg',
+                'description' => 'High quality cement',
                 'brand_id' => '1',
-                'image' => 'https://res.cloudinary.com/dqv4l1mkj/image/upload/v1696604942/portfolio-laravel-pos/yukzstplmvaz17fpy0gb.png',
+                'image' => 'cement.jpg',
             ],
             [
-                'name' => 'IPhone 3',
-                'description' => 'Special phone produced by Apple Corp.',
-                'brand_id' => '1',
-                'image' => 'https://res.cloudinary.com/dqv4l1mkj/image/upload/v1696604942/portfolio-laravel-pos/yukzstplmvaz17fpy0gb.png',
-            ],
-            [
-                'name' => 'Nokia 1100',
-                'description' => 'Special phone produced by Nokia',
+                'name' => 'Crown Paint 20L',
+                'description' => 'Durable wall paint',
                 'brand_id' => '2',
-                'image' => 'https://res.cloudinary.com/dqv4l1mkj/image/upload/v1696604941/portfolio-laravel-pos/j0sfnguct5t3tkf5pudw.jpg',
+                'image' => 'paint.jpg',
             ],
             [
-                'name' => 'Nokia 6300',
-                'description' => 'Special phone produced by Nokia',
-                'brand_id' => '2',
-                'image' => 'https://res.cloudinary.com/dqv4l1mkj/image/upload/v1696604941/portfolio-laravel-pos/tt1ybvszkql85syb9gx6.jpg',
+                'name' => 'Iron Sheet Gauge 28',
+                'description' => 'Strong roofing sheet',
+                'brand_id' => '3',
+                'image' => 'iron.jpg',
             ]
         ]);
 

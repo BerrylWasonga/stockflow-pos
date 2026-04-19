@@ -67,7 +67,7 @@
                     <address>
                         {{ $invoice->customer->name }}<br />
                         {{ $invoice->customer->address }}<br />
-                        Bangladesh<br />
+                        {{ $invoice->customer->location }}<br />
                         {{ $invoice->customer->phone }}
                     </address>
                 </div>

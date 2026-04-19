@@ -43,6 +43,10 @@
                         <label for="exampleInputEmail1">Address</label>
                         <textarea name="address" id="" cols="30" rows="3" class="form-control"></textarea>
                     </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" placeholder="e.g. Kenya, Uganda, Bangladesh">
+                    </div>
                     <button type="submit" class="btn  btn-primary">Add Customer</button>
                 </div>
             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Batch;
 use App\Models\Customer;
 use App\Models\Invoice;
+use App\Models\InvoiceItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -60,12 +61,25 @@ class InvoiceController extends Controller
         $invoice = new Invoice();
         $invoice->invoice_no = Carbon::now()->format('dmY') . '-' . $invoice_count;
         $invoice->customer_id = $request->customer_id;
-        $invoice->products = json_encode($request->products);
         $invoice->total = $request->total;
         $invoice->due = $request->due_amount;
         $invoice->status = $request->status;
         $invoice->profit = $profit;
         $invoice->save();
+
+        // Create invoice items
+        foreach ($products as $product) {
+            InvoiceItem::create([
+                'invoice_id' => $invoice->id,
+                'batch_id' => $product['batch_id'],
+                'name' => $product['name'],
+                'serial_no' => $product['serial_no'] ?? null,
+                'quantity' => $product['quantity'],
+                'price' => $product['price'],
+                'total' => $product['total'],
+            ]);
+        }
+
         return redirect()->route('invoices.show', $invoice);
     }
 
@@ -74,7 +88,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        $products = json_decode($invoice->products);
+        $products = $invoice->items;
         return view('invoices.invoice', compact('invoice', 'products'));
     }
 
@@ -83,7 +97,7 @@ class InvoiceController extends Controller
      */
     public function download(Invoice $invoice)
     {
-        $products = json_decode($invoice->products);
+        $products = $invoice->items;
         $html = view('invoices.invoice-download', compact('invoice', 'products'))->render();
         $filename = 'invoice-' . $invoice->invoice_no . '.html';
 
@@ -117,10 +131,9 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        $products = json_decode($invoice->products);
-        foreach ($products as $key => $product) {
-            $batch = Batch::find($product->batch_id);
-            $batch->rem_quantity += $product->quantity;
+        foreach ($invoice->items as $item) {
+            $batch = Batch::find($item->batch_id);
+            $batch->rem_quantity += $item->quantity;
             $batch->update();
         };
 

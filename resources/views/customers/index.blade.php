@@ -36,6 +36,7 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th>Location</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -47,6 +48,7 @@
                     <td>{{ $customer->phone }}</td>
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->address }}</td>
+                    <td>{{ $customer->location }}</td>
                     <td><a class="text-info" href="{{ route('customers.edit', $customer->id) }}"><i
                                 class="feather icon-edit"></i> Edit</a>|
                         <a class="text-danger" href="javascript:{}" onclick="deleteFunction({{ $customer->id }})"><i
@@ -68,6 +70,7 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Address</th>
+                    <th>Location</th>
                     <th>Action</th>
                 </tr>
             </tfoot>
