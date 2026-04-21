@@ -8,13 +8,23 @@
 
 @section('main')
 <form method="POST" action="{{ route('invoices.update',$invoice->id) }}" x-data="{
-    total_due: {{ $invoice->total }},
-    due: null,
-    paid: null,
+    total_invoice: {{ $invoice->total }},
+    previously_paid: {{ $invoice->total - $invoice->due }},
+    current_due: {{ $invoice->due }},
+    additional_payment: 0,
     setStatus: function(){
-        if(this.due == 0){
+        let total_paid = this.previously_paid + this.additional_payment;
+        let new_remaining_due = this.total_invoice - total_paid;
+        
+        // Update hidden field with new due amount
+        this.$refs.hidden_due.value = new_remaining_due;
+        
+        // Set status based on new remaining due
+        if(new_remaining_due == 0){
             this.$refs.status.value = 'paid';
-        }else{
+        }else if(new_remaining_due == this.total_invoice){
+            this.$refs.status.value = 'due';
+        }else if(new_remaining_due > 0 && new_remaining_due < this.total_invoice){
             this.$refs.status.value = 'partial';
         }
     }   
@@ -30,28 +40,51 @@
                 <div class="card-body">
 
                     <div class="form-group">
-                        <label for="total">Total Due<small class="text-info">[Ksh]</small></label>
-                        <input type="number" class="form-control" id="total" name="total" x-model="total_due" readonly>
+                        <label for="total">Total Invoice Amount<small class="text-info">[Ksh]</small></label>
+                        <input type="number" class="form-control" id="total" x-model.number="total_invoice" readonly style="background-color: #e8f4f8;">
                     </div>
+
                     <div class="form-group">
-                        <label for="paid">Pay Now <small class="text-info">[Ksh]</small></label>
-                        <input type="number" class="form-control" id="paid" x-model="paid"
-                            x-on:input="due = total_due - paid" x-on:blur="setStatus()">
+                        <label for="previously_paid">Previously Paid<small class="text-info">[Ksh]</small></label>
+                        <input type="number" class="form-control" id="previously_paid" x-model.number="previously_paid" readonly style="background-color: #e8f4f8;">
                     </div>
+
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Remaining Due<small class="text-info">[Ksh]</small></label>
-                        <input type="number" class="form-control" id="due_amount" name="due_amount" x-model="due"
-                            x-on:input="paid = total_due - due" x-on:blur="setStatus()">
+                        <label for="current_due">Current Remaining Due<small class="text-info">[Ksh]</small></label>
+                        <input type="number" class="form-control" id="current_due" x-model.number="current_due" readonly style="background-color: #e8f4f8;">
                     </div>
+
+                    <hr>
+
                     <div class="form-group">
-                        <label for="status">Payment Status<small class="text-info">[Ksh]</small></label>
-                        <select name="status" id="status" x-ref="status" class="form-control" readonly>
-                            <option value="paid" {{ $invoice->status == 'paid' ? 'selected' : '' }}>Paid</option>
-                            <option value="partial" {{ $invoice->status == 'partial' ? 'selected' : '' }}>Partial
-                            </option>
-                            <option value="due" {{ $invoice->status == 'due' ? 'selected' : '' }}>Due</option>
+                        <label for="additional_payment">Additional Payment Now <small class="text-info text-danger">[Enter amount to add]</small></label>
+                        <input type="number" class="form-control" id="additional_payment" x-model.number="additional_payment" placeholder="Enter additional payment amount"
+                            x-on:input="setStatus()" x-on:blur="setStatus()" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="total_paid">New Total Paid<small class="text-info">[Ksh]</small></label>
+                        <input type="number" class="form-control" id="total_paid" 
+                            x-model.number="previously_paid + additional_payment" readonly style="background-color: #d4edda; font-weight: bold;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new_due">New Remaining Due<small class="text-info">[Ksh]</small></label>
+                        <input type="number" class="form-control" id="new_due" 
+                            x-model.number="total_invoice - (previously_paid + additional_payment)" readonly style="background-color: #d4edda; font-weight: bold;">
+                    </div>
+
+                    <input type="hidden" name="due_amount" x-ref="hidden_due" :value="total_invoice - (previously_paid + additional_payment)">
+
+                    <div class="form-group">
+                        <label for="status">Payment Status<small class="text-info">[Auto-calculated]</small></label>
+                        <select name="status" id="status" x-ref="status" class="form-control" readonly style="font-weight: bold;">
+                            <option value="paid" {{ $invoice->status == 'paid' ? 'selected' : '' }}>✓ Paid</option>
+                            <option value="partial" {{ $invoice->status == 'partial' ? 'selected' : '' }}>⊕ Partial</option>
+                            <option value="due" {{ $invoice->status == 'due' ? 'selected' : '' }}>✗ Due</option>
                         </select>
                     </div>
+
                     <button type="submit" class="btn  btn-primary show btn-block">Adjust Invoice</button>
                 </div>
             </div>
