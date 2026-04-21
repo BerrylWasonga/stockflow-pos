@@ -56,11 +56,11 @@
                 <div class="col-6"> <strong>Pay To:</strong>
                     <address>
                         {{ $settings->shop_name }}<br />
-                        2705 N. Enterprise St<br />
-                        Chuka Ndangani, Meru-Road<br />
-                        contact@koiceinc.com
+                        40600 <br />
+                        Siaya, Siaya-Road<br />
+                        berrylwasonga@gmail.com
                         <br>
-                        079143050
+                        0792827238
                     </address>
                 </div>
                 <div class="col-6 text-end"> <strong>Invoiced To:</strong>
