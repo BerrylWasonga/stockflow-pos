@@ -163,7 +163,7 @@
                     </div>
                     <div class="form-group">
                         <label for="status">Payment Status<small class="text-info">[Ksh]</small></label>
-                        <select name="status" id="status" x-ref="status" class="form-control" required>
+                        <select name="status" id="status" x-ref="status" class="form-control" readonly>
                             <option></option>
                             <option value="paid">Paid</option>
                             <option value="partial">Partial</option>

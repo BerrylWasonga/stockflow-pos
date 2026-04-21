@@ -46,7 +46,6 @@ class InvoiceController extends Controller
             "total" => "required",
             "due_amount" => "required",
             "products" => "required",
-            "status" => "required",
         ]);
 
 
@@ -63,7 +62,16 @@ class InvoiceController extends Controller
         $invoice->customer_id = $request->customer_id;
         $invoice->total = $request->total;
         $invoice->due = $request->due_amount;
-        $invoice->status = $request->status;
+
+        // Automatically calculate status based on due amount
+        if ($request->due_amount == 0) {
+            $invoice->status = 'paid';
+        } elseif ($request->due_amount == $request->total) {
+            $invoice->status = 'due';
+        } else {
+            $invoice->status = 'partial';
+        }
+
         $invoice->profit = $profit;
         $invoice->save();
 
@@ -122,6 +130,16 @@ class InvoiceController extends Controller
     public function update(Request $request, Invoice $invoice)
     {
         $invoice->due = $request->due_amount;
+
+        // Automatically calculate status based on due amount
+        if ($request->due_amount == 0) {
+            $invoice->status = 'paid';
+        } elseif ($request->due_amount == $invoice->total) {
+            $invoice->status = 'due';
+        } else {
+            $invoice->status = 'partial';
+        }
+
         $invoice->update();
         return redirect()->route('invoices.index');
     }
