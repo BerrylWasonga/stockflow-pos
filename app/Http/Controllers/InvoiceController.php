@@ -112,6 +112,7 @@ class InvoiceController extends Controller
         return response($html, 200, [
             'Content-Type' => 'text/html; charset=utf-8',
             'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Content-Length' => strlen($html),
             'Cache-Control' => 'no-cache, no-store, must-revalidate',
         ]);
     }
