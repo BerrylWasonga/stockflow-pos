@@ -29,6 +29,65 @@
             <h5 class="text-white">Today's Stat.</h5>
         </div>
         <!-- alert end -->
+
+        <!-- Low Stock Alert Section -->
+        @if(count($lowStockItems) > 0)
+            <div class="col-12 mb-4">
+                <div class="card border-danger">
+                    <div class="card-header bg-danger">
+                        <h5 class="text-white mb-0">
+                            <i class="feather icon-alert-circle mr-2"></i>
+                            Low Stock Alert - {{ count($lowStockItems) }} Product(s) Below Threshold
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>Batch No.</th>
+                                        <th>Current Stock</th>
+                                        <th>Supplier</th>
+                                        <th>Unit Price</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($lowStockItems as $item)
+                                        <tr class="@if($item['current_stock'] <= 2) table-danger @else table-warning @endif">
+                                            <td>
+                                                <strong>{{ $item['product_name'] }}</strong>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-secondary">{{ $item['batch_no'] }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge @if($item['current_stock'] <= 2) badge-danger @else badge-warning @endif">
+                                                    {{ $item['current_stock'] }} units
+                                                </span>
+                                            </td>
+                                            <td>{{ $item['supplier'] }}</td>
+                                            <td>@ksh($item['sell_price'])</td>
+                                            <td>
+                                                @if($item['current_stock'] <= 2)
+                                                    <span class="badge badge-danger">Critical</span>
+                                                @elseif($item['current_stock'] <= 5)
+                                                    <span class="badge badge-warning">Warning</span>
+                                                @else
+                                                    <span class="badge badge-info">Low</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <!-- Low Stock Alert Section End -->
     </div>
     <!-- table card-1 start -->
     <div class="col-md-12 col-xl-6">

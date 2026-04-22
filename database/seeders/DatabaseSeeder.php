@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'name' => 'Berryl Wasonga',
-            'email' => 'berrylwasonga@gmail.com',
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
             'password' => Hash::make('password'),
         ]);
 
         DB::table('settings')->insert([
-            'shop_name' => 'Berryl Hardware Store',
+            'shop_name' => 'My POS System',
             'logo' => 'logo.png'
         ]);
 

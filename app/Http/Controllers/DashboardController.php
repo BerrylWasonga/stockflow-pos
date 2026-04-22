@@ -16,19 +16,18 @@ class DashboardController extends Controller
         $report = new Report();
         $currentDateInvoices = Invoice::whereDate('created_at', Carbon::now())->take(5)->get();
 
-
-
-
         // Today's all report
         $dailyReport = $report->getReport('daily', null, null);
 
         // Profit of current week
         $weeklyProfit = $report->getReport('weekly', null, null);
 
-        // Profit of current week
+        // Profit of current month
         $monthlyProfit = $report->getReport('monthly', null, null);
 
+        // Get low stock items
+        $lowStockItems = $report->getLowStockItems(10);
 
-        return view('welcome', compact('dailyReport', 'weeklyProfit', 'monthlyProfit', 'currentDateInvoices'));
+        return view('welcome', compact('dailyReport', 'weeklyProfit', 'monthlyProfit', 'currentDateInvoices', 'lowStockItems'));
     }
 }

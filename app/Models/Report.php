@@ -146,4 +146,35 @@ class Report extends Model
             'topExpenseCategory' => $topExpenseCategory
         ];
     }
+
+    /**
+     * Get products with low stock (below threshold)
+     * @param int $threshold - Stock level threshold (default: 10)
+     * @return array - Array of low stock batches with product details
+     */
+    public function getLowStockItems($threshold = 10)
+    {
+        $lowStockItems = [];
+        
+        // Get all batches with remaining quantity below threshold
+        $batches = Batch::where('rem_quantity', '>', 0)
+            ->where('rem_quantity', '<=', $threshold)
+            ->with('product', 'supplier')
+            ->orderBy('rem_quantity', 'asc')
+            ->get();
+
+        foreach ($batches as $batch) {
+            $lowStockItems[] = [
+                'id' => $batch->id,
+                'product_name' => $batch->product->name,
+                'batch_no' => $batch->batch_no,
+                'current_stock' => $batch->rem_quantity,
+                'threshold' => $threshold,
+                'supplier' => $batch->supplier->name ?? 'Unknown',
+                'sell_price' => $batch->sell_price
+            ];
+        }
+
+        return $lowStockItems;
+    }
 }
