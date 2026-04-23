@@ -86,7 +86,16 @@ This system serves as a **foundation for more advanced enterprise systems**, inc
 
 ## 📸 Screenshots
 
-> *(Add screenshots here — dashboard, invoice page, product page)*
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/65d41ba4-043d-4c62-847d-1f32bf2fe7bd" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1cf8ab80-aac4-4b0f-972b-5306702e5b92" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e5ee7ab3-23bb-4909-8585-63232a20d86b" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/be52e379-08f0-467c-8d44-2e4ee5ac9184" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9195ffd6-0f77-450f-8d7b-068a4217aef3" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/62371e7d-ac81-414b-992f-d29ce373fcde" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/25fcb30b-c30a-4de4-9b52-c06a8d4b0077" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4af269e6-98f6-4df4-a583-022c3d00dc2b" />
+
 
 ---
 
