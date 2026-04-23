@@ -93,6 +93,9 @@ This system serves as a **foundation for more advanced enterprise systems**, inc
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/be52e379-08f0-467c-8d44-2e4ee5ac9184" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9195ffd6-0f77-450f-8d7b-068a4217aef3" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/62371e7d-ac81-414b-992f-d29ce373fcde" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8dfd42fa-bba3-42e3-8f7f-ed20a4f6e777" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/dc8b8fce-f811-40b2-b459-942c0127935a" />
+
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/25fcb30b-c30a-4de4-9b52-c06a8d4b0077" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4af269e6-98f6-4df4-a583-022c3d00dc2b" />
 
