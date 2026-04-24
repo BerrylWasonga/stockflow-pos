@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_no');
-            $table->integer('customer_id');
+            $table->foreignId('customer_id')->constrained('customers')->onDelete('restrict');
             $table->json('products');
-            $table->integer('total');
-            $table->integer('due');
+            $table->decimal('total', 10, 2);
+            $table->decimal('due', 10, 2);
             $table->string('status');
-            $table->string('profit');
+            $table->decimal('profit', 10, 2);
             $table->timestamps();
         });
     }

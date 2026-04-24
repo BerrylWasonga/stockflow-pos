@@ -21,6 +21,8 @@ class SupplierController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Supplier::class);
+        
         return view('suppliers.create');
     }
 
@@ -29,6 +31,8 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Supplier::class);
+        
         $request->validate([
             'name' => 'required',
             'phone' => 'required',
@@ -58,6 +62,8 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
+        $this->authorize('update', $supplier);
+        
         return view('suppliers.edit', compact('supplier'));
     }
 
@@ -66,6 +72,8 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
+        $this->authorize('update', $supplier);
+        
         $request->validate([
             'name' => 'required',
             'phone' => 'required',
@@ -86,6 +94,8 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
+        $this->authorize('delete', $supplier);
+        
         $supplier->delete();
         return redirect()->back();
     }

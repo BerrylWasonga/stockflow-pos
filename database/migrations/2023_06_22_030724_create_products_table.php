@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->mediumText('description');
-            $table->integer('brand_id');
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('restrict');
             $table->string('image');
             $table->timestamps();
             $table->softDeletes();

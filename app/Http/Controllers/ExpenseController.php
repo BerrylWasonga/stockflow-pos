@@ -22,6 +22,8 @@ class ExpenseController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Expense::class);
+        
         $types = Type::all();
         return view('expenses.create', compact('types'));
     }
@@ -31,6 +33,8 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Expense::class);
+        
         $request->validate([
             'amount' => 'required',
             'type' => 'required'
@@ -56,6 +60,8 @@ class ExpenseController extends Controller
      */
     public function edit(Expense $expense)
     {
+        $this->authorize('update', $expense);
+        
         $types = Type::all();
         return view('expenses.create', compact('types', 'expense'));
     }
@@ -65,6 +71,8 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
+        $this->authorize('update', $expense);
+        
         $request->validate([
             'amount' => 'required',
             'type' => 'required'
@@ -81,6 +89,8 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
+        $this->authorize('delete', $expense);
+        
         $expense->delete();
         return redirect()->back();
     }

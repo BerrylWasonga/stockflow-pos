@@ -22,6 +22,8 @@ class TypeController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Type::class);
+        
         $type = Type::all();
         return view('expenses.types.create', compact('type'));
     }
@@ -31,6 +33,8 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Type::class);
+        
         $request->validate([
             'name' => 'required'
         ]);
@@ -54,6 +58,8 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
+        $this->authorize('update', $type);
+        
         return view('expenses.types.edit', compact('type'));
     }
 
@@ -62,6 +68,8 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
+        $this->authorize('update', $type);
+        
         $request->validate([
             'name' => 'required'
         ]);
@@ -76,6 +84,8 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
+        $this->authorize('delete', $type);
+        
         $type->delete();
         return redirect()->back();
     }

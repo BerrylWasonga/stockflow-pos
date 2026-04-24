@@ -24,6 +24,8 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Product::class);
+        
         $brands = Brand::all();
         $categories = Category::all();
         return view('products.create', compact('brands', 'categories'));
@@ -34,6 +36,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Product::class);
+        
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -80,6 +84,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', $product);
+        
         $brands = Brand::all();
         $categories = Category::all();
         return view('products.edit', compact('product', 'brands', 'categories'));
@@ -90,6 +96,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update', $product);
+        
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -129,6 +137,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
+        
         $product->delete();
         return redirect()->back();
     }

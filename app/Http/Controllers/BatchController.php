@@ -28,6 +28,8 @@ class BatchController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Batch::class);
+        
         $products = Product::all();
         $suppliers = Supplier::all();
         return view('batches.create', compact('products', 'suppliers'));
@@ -38,6 +40,8 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Batch::class);
+        
         $request->validate([
             'product_id' => 'required',
             'quantity' => 'required',
@@ -79,6 +83,7 @@ class BatchController extends Controller
      */
     public function edit(Batch $batch,  Request $request)
     {
+        $this->authorize('update', $batch);
 
         $type = $request->type;
         $products = Product::all();
@@ -92,6 +97,7 @@ class BatchController extends Controller
      */
     public function update(Request $request, Batch $batch)
     {
+        $this->authorize('update', $batch);
 
         if ($request->type === 'adjust_payment') {
             $request->validate([
@@ -126,6 +132,8 @@ class BatchController extends Controller
      */
     public function destroy(Batch $batch)
     {
+        $this->authorize('delete', $batch);
+        
         $batch->delete();
         return redirect()->back();
     }

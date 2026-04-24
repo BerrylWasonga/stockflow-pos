@@ -25,6 +25,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Invoice::class);
+        
         $customers = Customer::all();
         $batches = Batch::where('rem_quantity', '>=', 1)->get();
 
@@ -36,6 +38,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Invoice::class);
 
         $profit = 0;
         $current_date = Carbon::today();
@@ -96,6 +99,8 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
+        $this->authorize('view', $invoice);
+        
         $products = $invoice->items;
         return view('invoices.invoice', compact('invoice', 'products'));
     }
@@ -105,6 +110,8 @@ class InvoiceController extends Controller
      */
     public function download(Invoice $invoice)
     {
+        $this->authorize('view', $invoice);
+        
         $products = $invoice->items;
         $html = view('invoices.invoice-download', compact('invoice', 'products'))->render();
         $filename = 'invoice-' . $invoice->invoice_no . '.html';
@@ -122,6 +129,8 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
+        $this->authorize('update', $invoice);
+        
         return view('invoices.edit', compact('invoice'));
     }
 
@@ -130,6 +139,8 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
+        $this->authorize('update', $invoice);
+        
         $invoice->due = $request->due_amount;
 
         // Automatically calculate status based on due amount
@@ -150,6 +161,8 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
+        $this->authorize('delete', $invoice);
+        
         foreach ($invoice->items as $item) {
             $batch = Batch::find($item->batch_id);
             $batch->rem_quantity += $item->quantity;

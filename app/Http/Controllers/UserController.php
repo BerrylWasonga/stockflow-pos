@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\StrongPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,11 +29,10 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'current_password' => 'nullable|required_with:password',
-            'password' => 'nullable|confirmed|min:8',
+            'password' => ['nullable', new StrongPassword, 'confirmed'],
         ], [
             'current_password.required_with' => 'Current password is required to change password',
             'password.confirmed' => 'Password confirmation does not match',
-            'password.min' => 'Password must be at least 8 characters',
         ]);
 
         // Verify current password if changing password

@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Invoice;
+use App\Models\User;
+
+class InvoicePolicy
+{
+    /**
+     * Determine whether the user can view any invoices.
+     */
+    public function viewAny(User $user): bool
+    {
+        return true; // All authenticated users can view invoices
+    }
+
+    /**
+     * Determine whether the user can view the invoice.
+     */
+    public function view(User $user, Invoice $invoice): bool
+    {
+        return true; // All authenticated users can view any invoice
+    }
+
+    /**
+     * Determine whether the user can create invoices.
+     */
+    public function create(User $user): bool
+    {
+        // Managers and admins can create invoices
+        return $user->role->isManager();
+    }
+
+    /**
+     * Determine whether the user can update the invoice.
+     */
+    public function update(User $user, Invoice $invoice): bool
+    {
+        // Only managers and admins can update invoices
+        // And only if invoice is not fully paid
+        return $user->role->isManager() && $invoice->status !== 'paid';
+    }
+
+    /**
+     * Determine whether the user can delete the invoice.
+     */
+    public function delete(User $user, Invoice $invoice): bool
+    {
+        // Only admin can delete invoices
+        return $user->role->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can restore the invoice.
+     */
+    public function restore(User $user, Invoice $invoice): bool
+    {
+        return $user->role->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can permanently delete the invoice.
+     */
+    public function forceDelete(User $user, Invoice $invoice): bool
+    {
+        return $user->role->isAdmin();
+    }
+}

@@ -21,6 +21,8 @@ class BrandController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Brand::class);
+        
         return view('brands.create');
     }
 
@@ -29,6 +31,8 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Brand::class);
+        
         $request->validate(['name' => 'required']);
         $brand = new Brand();
         $brand->name = $request->name;
@@ -49,6 +53,8 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
+        $this->authorize('update', $brand);
+        
         return view('brands.edit', compact('brand'));
     }
 
@@ -57,6 +63,8 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
+        $this->authorize('update', $brand);
+        
         $request->validate(['name' => 'required']);
         $brand->name = $request->name;
         $brand->update();
@@ -68,6 +76,8 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
+        $this->authorize('delete', $brand);
+        
         $brand->delete();
         return redirect()->back();
     }
