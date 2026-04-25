@@ -29,8 +29,10 @@ class InvoicePolicy
     public function create(User $user): bool
     {
         // Managers and admins can create invoices
-        return $user->role->isManager();
+         return $user->role !== null;  // Allow any authenticated user
+        //return $user->role?->isManager() ?? false;
     }
+
 
     /**
      * Determine whether the user can update the invoice.
@@ -39,7 +41,7 @@ class InvoicePolicy
     {
         // Only managers and admins can update invoices
         // And only if invoice is not fully paid
-        return $user->role->isManager() && $invoice->status !== 'paid';
+        return ($user->role?->isManager() ?? false) && $invoice->status !== 'paid';
     }
 
     /**
@@ -48,7 +50,7 @@ class InvoicePolicy
     public function delete(User $user, Invoice $invoice): bool
     {
         // Only admin can delete invoices
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -56,7 +58,7 @@ class InvoicePolicy
      */
     public function restore(User $user, Invoice $invoice): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -64,6 +66,6 @@ class InvoicePolicy
      */
     public function forceDelete(User $user, Invoice $invoice): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }

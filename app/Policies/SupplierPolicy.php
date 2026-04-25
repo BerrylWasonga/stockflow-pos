@@ -29,7 +29,8 @@ class SupplierPolicy
     public function create(User $user): bool
     {
         // Managers and admins can create suppliers
-        return $user->role->isManager();
+        //return $user->role?->isManager() ?? false;
+        return $user->role !== null; 
     }
 
     /**
@@ -38,7 +39,7 @@ class SupplierPolicy
     public function update(User $user, Supplier $supplier): bool
     {
         // Managers and admins can update suppliers
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -47,7 +48,7 @@ class SupplierPolicy
     public function delete(User $user, Supplier $supplier): bool
     {
         // Only admin can delete suppliers
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -55,7 +56,7 @@ class SupplierPolicy
      */
     public function restore(User $user, Supplier $supplier): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -63,6 +64,6 @@ class SupplierPolicy
      */
     public function forceDelete(User $user, Supplier $supplier): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }

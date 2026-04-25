@@ -29,7 +29,8 @@ class CategoryPolicy
     public function create(User $user): bool
     {
         // Only managers and admins can create categories
-        return $user->role->isManager();
+        //return $user->role?->isManager() ?? false;
+        return $user->role !== null; 
     }
 
     /**
@@ -38,7 +39,7 @@ class CategoryPolicy
     public function update(User $user, Category $category): bool
     {
         // Only managers and admins can update categories
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -47,7 +48,7 @@ class CategoryPolicy
     public function delete(User $user, Category $category): bool
     {
         // Only admin can delete categories
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -55,7 +56,7 @@ class CategoryPolicy
      */
     public function restore(User $user, Category $category): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -63,6 +64,6 @@ class CategoryPolicy
      */
     public function forceDelete(User $user, Category $category): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }

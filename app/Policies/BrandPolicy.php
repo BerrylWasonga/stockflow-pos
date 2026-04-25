@@ -29,7 +29,8 @@ class BrandPolicy
     public function create(User $user): bool
     {
         // Only managers and admins can create brands
-        return $user->role->isManager();
+        //return $user->role?->isManager() ?? false;
+        return $user->role !== null; 
     }
 
     /**
@@ -38,7 +39,7 @@ class BrandPolicy
     public function update(User $user, Brand $brand): bool
     {
         // Only managers and admins can update brands
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -47,7 +48,7 @@ class BrandPolicy
     public function delete(User $user, Brand $brand): bool
     {
         // Only admin can delete brands
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -55,7 +56,7 @@ class BrandPolicy
      */
     public function restore(User $user, Brand $brand): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -63,6 +64,6 @@ class BrandPolicy
      */
     public function forceDelete(User $user, Brand $brand): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }

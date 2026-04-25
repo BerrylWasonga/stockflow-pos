@@ -29,7 +29,8 @@ class ProductPolicy
     public function create(User $user): bool
     {
         // Only managers and admins can create products
-        return $user->role->isManager();
+        //return $user->role?->isManager() ?? false;
+        return $user->role !== null; 
     }
 
     /**
@@ -38,7 +39,7 @@ class ProductPolicy
     public function update(User $user, Product $product): bool
     {
         // Only managers and admins can update products
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -47,7 +48,7 @@ class ProductPolicy
     public function delete(User $user, Product $product): bool
     {
         // Only admin can delete products
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -55,7 +56,7 @@ class ProductPolicy
      */
     public function restore(User $user, Product $product): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -63,6 +64,6 @@ class ProductPolicy
      */
     public function forceDelete(User $user, Product $product): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }

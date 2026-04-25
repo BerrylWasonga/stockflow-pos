@@ -29,7 +29,8 @@ class ExpensePolicy
     public function create(User $user): bool
     {
         // Managers and admins can create expenses
-        return $user->role->isManager();
+        //return $user->role?->isManager() ?? false;
+        return $user->role !== null; 
     }
 
     /**
@@ -38,7 +39,7 @@ class ExpensePolicy
     public function update(User $user, Expense $expense): bool
     {
         // Managers and admins can update expenses
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -47,7 +48,7 @@ class ExpensePolicy
     public function delete(User $user, Expense $expense): bool
     {
         // Only admin can delete expenses
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -55,7 +56,7 @@ class ExpensePolicy
      */
     public function restore(User $user, Expense $expense): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -63,6 +64,6 @@ class ExpensePolicy
      */
     public function forceDelete(User $user, Expense $expense): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }

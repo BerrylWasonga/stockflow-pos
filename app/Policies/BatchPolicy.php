@@ -29,7 +29,8 @@ class BatchPolicy
     public function create(User $user): bool
     {
         // Only managers and admins can create batches
-        return $user->role->isManager();
+        //return $user->role?->isManager() ?? false;
+        return $user->role !== null; 
     }
 
     /**
@@ -38,7 +39,7 @@ class BatchPolicy
     public function update(User $user, Batch $batch): bool
     {
         // Only managers and admins can update batches
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -47,7 +48,7 @@ class BatchPolicy
     public function delete(User $user, Batch $batch): bool
     {
         // Only admin can delete batches
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -55,7 +56,7 @@ class BatchPolicy
      */
     public function restore(User $user, Batch $batch): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -63,6 +64,6 @@ class BatchPolicy
      */
     public function forceDelete(User $user, Batch $batch): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }

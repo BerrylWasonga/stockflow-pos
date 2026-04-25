@@ -29,7 +29,7 @@ class TypePolicy
     public function create(User $user): bool
     {
         // Only managers and admins can create types
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -38,7 +38,7 @@ class TypePolicy
     public function update(User $user, Type $type): bool
     {
         // Only managers and admins can update types
-        return $user->role->isManager();
+        return $user->role?->isManager() ?? false;
     }
 
     /**
@@ -47,7 +47,7 @@ class TypePolicy
     public function delete(User $user, Type $type): bool
     {
         // Only admin can delete types
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -55,7 +55,7 @@ class TypePolicy
      */
     public function restore(User $user, Type $type): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 
     /**
@@ -63,6 +63,6 @@ class TypePolicy
      */
     public function forceDelete(User $user, Type $type): bool
     {
-        return $user->role->isAdmin();
+        return $user->role?->isAdmin() ?? false;
     }
 }
